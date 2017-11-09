@@ -1,0 +1,42 @@
+<div class="row" *ngIf="todos">
+	<div class="form-group col-xs-3">
+		<label class="form-control-label" for="status">Filter by
+			status</label> <select class="form-control" [(ngModel)]="filter" id="status"
+			name="status" #status="ngModel" (change)="filterTodos()">
+			<option value="true">Completed</option>
+			<option value="false">Pending</option>
+		</select>
+	</div>
+	<div class="col-xs-9"></div>
+</div>
+
+<div class="table-responsive">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th><span>ID</span></th>
+				<th><span>Description</span></th>
+				<th><span>Completed</span></th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody *ngIf="todos">
+			<tr *ngFor="let todo of todos">
+				<td>{{todo.id}}</td>
+				<td>{{todo.description}}</td>
+				<td><input type="checkbox" style="text-align: center;"
+					class="form-control" name="completed" id="field_completed"
+					[(ngModel)]="todo.completed" (change)="updateTodo(todo)" /></td>
+				<td class="text-right">
+					<div class="btn-group flex-btn-group-container">
+						<button type="submit"
+							replaceUrl="true" class="btn btn-danger btn-sm">
+							<span class="fa fa-remove"></span> <span
+								class="d-none d-md-inline">Delete</span>
+						</button>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
