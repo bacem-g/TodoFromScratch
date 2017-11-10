@@ -46,7 +46,6 @@ public class TodoService {
 
 	public List<Todo> findByQuery(boolean completed) {
 		log.debug("Request to findByQuery Todo : {}", completed);
-		//return todoRepository.findByQuery(completed);
-		return null;
+		return todoRepository.findByQuery(completed);
 	}
 }

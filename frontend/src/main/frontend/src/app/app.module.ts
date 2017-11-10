@@ -9,6 +9,8 @@ import { AddTodoComponent } from "./todo/add-todo.component";
 import { TodoService } from "./todo/todo.service";
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
+import { TodoCreatedNotificationService } from "./todo/todo-created-notification.service";
+
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { HttpModule } from '@angular/http';
     HttpModule,
     NgbModule.forRoot()
   ],
-  providers: [TodoService],
+  providers: [TodoService,
+              TodoCreatedNotificationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

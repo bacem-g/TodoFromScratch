@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Todo } from "./todo.model";
 import { TodoService } from "./todo.service";
 import { Observable } from "rxjs/Observable";
+import { TodoCreatedNotificationService } from "./todo-created-notification.service";
 
 @Component({
   selector: 'add-todo',
@@ -10,9 +11,10 @@ import { Observable } from "rxjs/Observable";
 })
 export class AddTodoComponent implements OnInit {
 
-    todo: Todo = {};
+    todo: Todo = {completed:false};
 
-  constructor(private todoService: TodoService) { }
+  constructor(private todoService: TodoService,
+              private todoCreatedNotificationService: TodoCreatedNotificationService) { }
 
   ngOnInit() {
   }
@@ -27,10 +29,16 @@ export class AddTodoComponent implements OnInit {
   }
   
   private onSaveSuccess(result: Todo) {
-      
+      console.log('todo saved successfully');
+      this.clear();
+      this.todoCreatedNotificationService.emitChange(true);
   }
 
   private onSaveError() {
+      console.error('could not save the todo');
   }
-
+  
+  clear() {
+      this.todo = {completed:false};
+  }
 }

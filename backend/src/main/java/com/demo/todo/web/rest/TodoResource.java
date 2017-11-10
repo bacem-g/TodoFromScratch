@@ -2,6 +2,7 @@ package com.demo.todo.web.rest;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,7 +38,7 @@ public class TodoResource {
     
     @PostMapping("/todos")
     public ResponseEntity<Todo> createTodo(@RequestBody Todo todo) throws URISyntaxException, EntityAlreadyExistException {
-        log.debug("REST request to save Todo : {}", todo);
+        log.info("REST request to save Todo : {}", todo);
         if (todo.getId() != null) {
             throw new EntityAlreadyExistException();
         }
@@ -48,7 +49,7 @@ public class TodoResource {
     
     @PutMapping("/todos")
     public ResponseEntity<Todo> updateTodo(@RequestBody Todo todo) throws URISyntaxException, EntityAlreadyExistException {
-        log.debug("REST request to update Todo : {}", todo);
+        log.info("REST request to update Todo : {}", todo);
         if (todo.getId() == null) {
             return createTodo(todo);
         }
@@ -58,27 +59,27 @@ public class TodoResource {
     
     @GetMapping("/todos")
     public List<Todo> getAllTodos() {
-        log.debug("REST request to get all Todos");
+        log.info("REST request to get all Todos");
         return todoService.findAll();
     }
     
     @GetMapping("/todos/{id}")
     public ResponseEntity<Todo> getTodo(@PathVariable Long id) {
-        log.debug("REST request to get Todo : {}", id);
+        log.info("REST request to get Todo : {}", id);
         Todo todo = todoService.findOne(id);
         return Optional.ofNullable(todo).map(localTodo -> new ResponseEntity<>(todo, HttpStatus.OK)).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
     
     @DeleteMapping("/todos/{id}")
     public ResponseEntity<Void> deleteTodo(@PathVariable Long id) {
-        log.debug("REST request to delete Todo : {}", id);
+        log.info("REST request to delete Todo : {}", id);
         todoService.delete(id);
         return ResponseEntity.ok().build();
     }
     
     @GetMapping("/todos/query")
-    public List<Todo> getTodosByQuery(@RequestParam boolean completed) {
-    	log.debug("REST request to get all Todos by query");
-    	return todoService.findByQuery(completed);
+    public List<Todo> getTodosByQuery(@RequestParam String completed) {
+    	log.info("REST request to get all Todos by query {}", completed);
+    	return todoService.findByQuery(Boolean.valueOf(completed));
     }
 }

@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @Table(name = "todo")
 public class Todo implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,7 +27,18 @@ public class Todo implements Serializable {
     @Column(name = "completed")
     private Boolean completed;
     
-    public Long getId() {
+    public Todo() {
+		super();
+	}
+    
+    public Todo(Long id, String description, Boolean completed) {
+		super();
+		this.id = id;
+		this.description = description;
+		this.completed = completed;
+	}
+
+	public Long getId() {
         return id;
     }
 
