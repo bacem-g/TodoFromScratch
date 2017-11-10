@@ -29,9 +29,9 @@ export class AddTodoComponent implements OnInit {
   }
   
   private onSaveSuccess(result: Todo) {
-      console.log('todo saved successfully');
-      this.clear();
       this.todoCreatedNotificationService.emitChange(true);
+      this.clear();
+      console.error('todo successfully saved');
   }
 
   private onSaveError() {
