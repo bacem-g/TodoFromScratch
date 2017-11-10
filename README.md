@@ -1,5 +1,5 @@
 # TodoFromScratch
-A todo application using Angular4, Spring boot and Spring mvc rest
+A todo application using Angular 4, Bootstrap 4, Spring boot, Spring mvc rest and H2 in memory DB
 
 To build the project from sources do this:
   - Run 'mvn clean install' on the parent folder
